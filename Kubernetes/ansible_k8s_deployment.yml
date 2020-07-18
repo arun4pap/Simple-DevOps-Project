@@ -1,0 +1,17 @@
+---
+- name: Create pods using deployment
+  hosts: kubernetes
+  become: true
+  become_user: admin
+  tasks:
+  - name: copy k8s_deployment.yml
+    copy:
+      src: /opt/docker/k8s_deployment.yml
+      dest: /opt/k8s/k8s_deployment.yml
+      mode: '0777'
+
+  - name: create a deployment
+    command: kubectl apply -f /opt/k8s/k8s_deployment.yml
+
+  - name: update deployment with new pods if image updated in docker hub
+    command: kubectl rollout restart deployment/k8s-deployment
