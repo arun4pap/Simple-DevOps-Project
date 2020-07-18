@@ -1,0 +1,14 @@
+---
+- name: create service for deployment
+  hosts: kubernetes
+  become: true
+  become_user: admin
+  tasks:
+  - name: copy k8s_service.yml
+    copy:
+      src: /opt/docker/k8s_service.yml
+      dest: /opt/k8s/k8s_service.yml
+      mode: '0777'
+
+  - name: create a service
+    command: kubectl apply -f /opt/k8s/k8s_service.yml
