@@ -5,15 +5,15 @@
 
   tasks:
   - name: creating docker image using docker command
-    command: docker run -d --name simple-devops-container -p 8080:8080 simple-devops-image
+    command: docker run -d --name tomcat1 -p 8888:8080 t1
 	
 # option-2 : creating docker container using docker_container module 	
 #  tasks:
 #  - name: create simple-devops-container
 #    docker_container:
-#      name: simple-devops-container
-#      image: simple-devops-image
+#      name: tomcat1
+#      image: t1
 #      state: present
 #      recreate: yes
 #      ports:
-#        - "8080:8080"
+#        - "8888:8080"
