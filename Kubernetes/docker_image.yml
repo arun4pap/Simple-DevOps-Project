@@ -1,0 +1,17 @@
+---
+- hosts: ansible
+  tasks:
+  - name: create docker image using war file
+    command: docker build -t tomcat_webapp:latest .
+    args:
+      chdir: /opt/docker
+
+  - name: create tag to image
+    command: docker tag tomcat_webapp arun4pap/tomcat_webapp
+
+  - name: push image on to dockerhub
+    command: docker push arun4pap/tomcat_webapp
+
+  - name: remove docker images from ansible server
+    command: docker rmi tomcat_webapp:latest arun4pap/tomcat_webapp tomcat:latest
+    ignore_errors: yes
